@@ -1,7 +1,9 @@
-let ballplace = document.querySelector('.place-for-ball'),
-    basketPlace = document.querySelector('.place-for-basket');
+const ballplace = document.querySelector('.place-for-ball'),
+    basketPlace = document.querySelector('.place-for-basket'),
+    scor = document.querySelector('.score');
 
-let ball = {
+
+const ball = {
   img: 'img/ball.png',
   width: '64px',
   speed: 0,
@@ -10,7 +12,7 @@ let ball = {
   }
 };
 
-let img = document.createElement('img');
+const img = document.createElement('img');
 ballplace.appendChild(img);
 img.src = ball.img;
 img.style.width = ball.width;
@@ -33,12 +35,12 @@ function respawn() {
    ballplace.style.marginLeft = ball.position(0,800) + 'px';
 }
 
-let basket = {
+const basket = {
   img: 'img/basket.png',
   width: '100px',
 };
 
-let photo = document.createElement('img');
+const photo = document.createElement('img');
 basketPlace.appendChild(photo);
 photo.src = basket.img;
 photo.style.width = basket.width;
@@ -48,16 +50,19 @@ basketPlace.style.bottom = 0;
 
 document.addEventListener('mousemove', function () {
   basketPlace.style.left = event.clientX + 'px';
-  
+
   if (event.clientX >= screen.width - 100) {
     basketPlace.style.left = screen.width - 100 + 'px';
   }
 });
 
+let number = 1;
 function score() {
   if (ballplace.offsetTop > basketPlace.offsetTop &&
     (ballplace.offsetLeft >= basketPlace.offsetLeft - 30 && ballplace.offsetLeft <= basketPlace.offsetLeft + 30)) {
     ball.speed = 0;
     respawn();
+    scor.innerHTML = number;
+    number = number + 1;
   }
 }
